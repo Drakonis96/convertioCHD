@@ -1,0 +1,9 @@
+services:
+  convertiochd:
+    build: .
+    ports:
+      - "5459:5459"
+    environment:
+      PORT: 5459
+    volumes:
+      - ./data:/app/data

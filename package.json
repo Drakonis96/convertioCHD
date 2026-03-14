@@ -1,0 +1,30 @@
+{
+  "name": "convertiochd",
+  "version": "0.0.1",
+  "private": true,
+  "type": "commonjs",
+  "description": "Graphical web app for converting BIN/CUE, BIN.ECM and IMG to CHD",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node scripts/run-local.js",
+    "serve": "node server.js",
+    "dev": "node server.js",
+    "test": "vitest run --globals",
+    "smoke": "node scripts/smoke-test.js"
+  },
+  "dependencies": {
+    "7zip-bin-full": "^26.0.1",
+    "archiver": "^7.0.1",
+    "chdman": "^0.286.2",
+    "express": "^5.1.0",
+    "ffmpeg-static": "^5.3.0",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "jsdom": "^28.1.0",
+    "supertest": "^7.1.4",
+    "vitest": "^3.2.4"
+  }
+}

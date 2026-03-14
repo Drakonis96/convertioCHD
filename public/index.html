@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>convertioCHD</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div id="announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+    <div id="alert-announcer" class="visually-hidden" aria-live="assertive" aria-atomic="true"></div>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="topbar-copy">
+          <p class="eyebrow">Graphical CHD Converter</p>
+          <h1>Convert disc images to CHD with drag and drop.</h1>
+          <p class="lede">
+            Drop files or archives into the interface. Matching sets are detected automatically, multiple batches can run in parallel, and completed jobs start downloading through the browser.
+          </p>
+        </div>
+
+        <div class="topbar-actions">
+          <button id="clear-finished-button" class="button button-muted" type="button">Clear finished</button>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <aside class="utility-rail">
+          <label
+            id="dropzone"
+            class="panel dropzone"
+            for="file-input"
+            role="button"
+            tabindex="0"
+            aria-controls="file-input"
+            aria-describedby="dropzone-help"
+          >
+            <input id="file-input" type="file" multiple>
+            <span class="dropzone-kicker">New batch</span>
+            <span class="dropzone-title">Drop files here or click to browse</span>
+            <span class="dropzone-copy">Uploads start immediately. Matching CUE, GDI, TOC, CCD, MDS, CDI, NRG, ECM, and archive sets are grouped automatically.</span>
+            <span id="dropzone-help" class="dropzone-hint">Supports <code>.cue</code>, <code>.gdi</code>, <code>.toc</code>, <code>.ccd</code>, <code>.mds</code>, <code>.cdi</code>, <code>.nrg</code>, <code>.bin</code>, <code>.img</code>, <code>.iso</code>, <code>.ecm</code>, <code>.zip</code>, <code>.7z</code>, <code>.rar</code>, <code>.tar</code>, and related track/audio files.</span>
+          </label>
+
+          <section class="panel compact-panel">
+            <div class="panel-header panel-header-tight">
+              <div>
+                <p class="card-eyebrow">Session</p>
+                <h2>Queue overview</h2>
+              </div>
+              <span id="stream-state" class="pill" role="status" aria-live="polite">Connecting</span>
+            </div>
+            <div id="session-summary" class="stack-list"></div>
+          </section>
+
+          <section class="panel compact-panel">
+            <div class="panel-header panel-header-tight">
+              <div>
+                <p class="card-eyebrow">Limits</p>
+                <h2>Upload safeguards</h2>
+              </div>
+            </div>
+            <div id="limits-summary" class="stack-list"></div>
+          </section>
+        </aside>
+
+        <section class="board">
+          <section class="panel board-panel uploads-panel">
+            <div class="panel-header panel-header-tight">
+              <div>
+                <p class="card-eyebrow">Uploads</p>
+                <h2>Incoming batches</h2>
+              </div>
+            </div>
+            <div id="uploads-list" class="stack-list" role="list" aria-label="Incoming uploads"></div>
+          </section>
+
+          <section class="panel board-panel jobs-panel">
+            <div class="panel-header">
+              <div>
+                <p class="card-eyebrow">Jobs</p>
+                <h2 id="jobs-heading">Active and recent batches</h2>
+              </div>
+            </div>
+
+            <div id="jobs-empty" class="empty-state" role="status">
+              Drop a batch on the left to start the first conversion.
+            </div>
+
+            <div id="jobs-list" class="jobs-list" role="list" aria-labelledby="jobs-heading"></div>
+          </section>
+        </section>
+
+        <aside class="sidebar">
+          <div id="summary-grid" class="summary-grid rail-summary-grid" aria-label="Batch summary"></div>
+
+          <section class="panel compact-panel mode-panel">
+            <div class="panel-header panel-header-tight">
+              <div>
+                <p class="card-eyebrow">Mode</p>
+                <h2>Output selection</h2>
+              </div>
+            </div>
+            <div class="selection-toggle" role="tablist" aria-label="Output selection mode">
+              <button id="automatic-mode-button" class="mode-button is-active" type="button" data-selection-mode="automatic" aria-pressed="true">Automatic</button>
+              <button id="manual-mode-button" class="mode-button" type="button" data-selection-mode="manual" aria-pressed="false">Manual</button>
+            </div>
+            <div id="mode-summary" class="stack-item mode-summary" role="status" aria-live="polite"></div>
+            <div id="automatic-settings" class="mode-pane">
+              <label class="field" for="console-select">
+                <span class="field-label">Console</span>
+                <select id="console-select"></select>
+              </label>
+              <p class="subtle">Choose the console and the app resolves the output profile for each detected group.</p>
+            </div>
+            <div id="manual-settings" class="mode-pane hidden">
+              <label class="field" for="manual-output-profile-select">
+                <span class="field-label">Output profile</span>
+                <select id="manual-output-profile-select"></select>
+              </label>
+              <p class="subtle">Force the generated CHD profile directly when you already know the right target.</p>
+            </div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
